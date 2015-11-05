@@ -31,6 +31,18 @@
     <Filter Include="Class\TurnManager">
       <UniqueIdentifier>{83b088f5-afa6-4edd-8499-130793d516b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{df7c60d6-46f3-40c6-82d4-0e8cfeee88cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{aadefe90-3749-4e94-a8e7-9f75a4f54872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\MainGame">
+      <UniqueIdentifier>{d881575a-ea61-4d3b-8b41-9c23f384df18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Result">
+      <UniqueIdentifier>{95742743-056a-415c-835d-e8fc9e0d1568}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\appEnv.hpp">

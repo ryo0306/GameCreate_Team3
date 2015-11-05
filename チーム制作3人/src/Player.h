@@ -91,9 +91,13 @@ public:
   //もしかしたらセレクト用のクラスを作るべき？
   bool Select(){};
 
+  //  現在の処理の段階を確認
+  Mode GetMode(){ return mode; }
+
 private:
   Type type;
   Status basic_status;
+  Mode  mode;
   Vec2i  pos;
   int    size;
   bool is_finish;

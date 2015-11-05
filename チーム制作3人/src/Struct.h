@@ -24,3 +24,12 @@ struct Status
   int magic;
   int defense;
 };
+
+enum Mode
+{
+  TYPESELECT,      //  タイプを選択
+  MOVE,            //  動く場所を選択
+  SKILLSELECT,     //  使うスキルを選択
+  CALCULATION,     //  ダメージ演算
+  FINiISH,         //  終了
+};

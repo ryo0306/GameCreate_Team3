@@ -11,7 +11,10 @@ void TurnManager::PlayerTurn()
 {
   if (turn == Turn::PLAYER)
   {
+    //MAYBE:動くモードと戦闘モードを分けるべき？
+    //if (player.MoveModa())
     player.Move();
+    //if (player.Select())
     player.DamageCalculation();
     //boss.GivenDamege(player.GiveDamage());
   }
