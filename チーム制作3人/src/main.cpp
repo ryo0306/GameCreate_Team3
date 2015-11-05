@@ -1,0 +1,20 @@
+﻿#include "TurnManager.h"
+
+int main() {
+
+  env;
+  TurnManager turnmanager;
+  turnmanager.SetUp();
+
+  while (env.isOpen()) {
+    env.begin();
+
+
+    turnmanager.PlayerTurn();
+    turnmanager.EnemyTurn();
+    turnmanager.TotalTurn();
+    turnmanager.Draw();
+
+    env.end();
+  }
+}
