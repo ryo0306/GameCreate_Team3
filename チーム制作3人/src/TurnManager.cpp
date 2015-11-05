@@ -11,12 +11,29 @@ void TurnManager::PlayerTurn()
 {
   if (turn == Turn::PLAYER)
   {
-    //MAYBE:動くモードと戦闘モードを分けるべき？
-    //if (player.MoveModa())
-    player.Move();
-    //if (player.Select())
-    player.DamageCalculation();
-    //boss.GivenDamege(player.GiveDamage());
+    //MAYBE:移動と移動選択を分けるべき？
+    switch (player.GetMode())
+    {
+    case Mode::TYPESELECT:
+      break;
+    case Mode::MOVE:
+      player.Move();
+      break;
+    case Mode::SKILLSELECT:
+      
+      break;
+    case Mode::CALCULATION:
+      player.DamageCalculation();
+      //boss.GivenDamege(player.GiveDamage());
+      break;
+    case Mode::FINiISH:
+      turn == Turn::ENEMY;
+      break;
+    default:
+      assert(0);
+      break;
+    }
+
   }
 }
 
@@ -24,10 +41,26 @@ void TurnManager::EnemyTurn()
 {
   if (turn == Turn::ENEMY)
   {
-    boss.SetPlayerPos(Vec2i(1, 1), Vec2i(1, 1), Vec2i(1, 1));
-    boss.AI();
-    boss.DamageCalculation();
-    //player.GivenDamege(boss.GiveDammage());
+    switch (boss.GetMode())
+    {
+    case Mode::TYPESELECT:
+      break;
+    case Mode::MOVE:
+      break;
+    case Mode::SKILLSELECT:
+      boss.SetPlayerPos(Vec2i(1, 1), Vec2i(1, 1), Vec2i(1, 1));
+      boss.AI();
+      break;
+    case Mode::CALCULATION:
+      boss.DamageCalculation();
+      //player.GivenDamege(boss.GiveDammage());
+      break;
+    case Mode::FINiISH:
+      turn == Turn::PLAYER;
+      break;
+    default:
+      break;
+    }
   }
 }
 
@@ -38,7 +71,7 @@ void TurnManager::Draw()
   boss.Draw();
 }
 
-void TurnManager::TotalTurn()
+void TurnManager::Total()
 {
   map.Edit("res/stage1.txt");
 }

@@ -22,7 +22,7 @@ public:
 
   void EnemyTurn();
   
-  void TotalTurn();
+  void Total();
 
   void Draw();
   
