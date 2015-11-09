@@ -87,7 +87,7 @@ private:
   Vec2i player_pos[3];     //  攻撃するときに見るプレイヤーのポジション
   Vec2i boss_pos;          //  位置
   Status boss_status;      //  ステータス
-  Mode mode;               //  現在の状態
+  Mode mode = Mode::TYPESELECT;               //  現在の状態
 };
 
 

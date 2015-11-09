@@ -60,6 +60,11 @@
 //ex)物理攻撃,攻撃魔法,防御魔法
 
 
+// 不安要素
+// あたり判定
+// 新たにあたり判定用mapchipを作り
+// 計算するときに判定する
+
 
 class Player
 {
@@ -97,7 +102,7 @@ public:
 private:
   Type type;
   Status basic_status;
-  Mode  mode;
+  Mode  mode = Mode::TYPESELECT;
   Vec2i  pos;
   int    size;
   bool is_finish;

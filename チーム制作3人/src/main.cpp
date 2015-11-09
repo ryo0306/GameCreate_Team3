@@ -12,7 +12,7 @@ int main() {
 
     turnmanager.PlayerTurn();
     turnmanager.EnemyTurn();
-    turnmanager.TotalTurn();
+    turnmanager.Total();
     turnmanager.Draw();
 
     env.end();
