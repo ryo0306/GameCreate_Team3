@@ -99,6 +99,9 @@ public:
   //  Œ»İ‚Ìˆ—‚Ì’iŠK‚ğŠm”F
   Mode GetMode(){ return mode; }
 
+  void ModeChange();
+
+
 private:
   Type type;
   Status basic_status;

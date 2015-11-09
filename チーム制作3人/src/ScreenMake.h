@@ -1,8 +1,8 @@
 #pragma once
 #include "lib/framework.hpp"
 #define env App::get()
-#define WINDOW_WIDTH 700
-#define WINDOW_HEIGHT 1000
+#define WINDOW_WIDTH 11*75
+#define WINDOW_HEIGHT 1200
 
 
 class App

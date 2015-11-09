@@ -4,7 +4,7 @@
 #include<sstream>
 #include "ScreenMake.h"
 #include "Collision.h"
-#define MAPCHIP_SIZE 100
+#define MAPCHIP_SIZE 75
 #define OBJECT_NUM 3
 //TODO?:EDITMODE‚Æ•ª‚¯‚é‚×‚«
 
@@ -18,8 +18,8 @@ enum MapObject
 
 enum MapSize
 {
-  WIDTH = 7,
-  HEIGHT = 10,
+  WIDTH = 11,
+  HEIGHT = 16,
 };
 
 class Map

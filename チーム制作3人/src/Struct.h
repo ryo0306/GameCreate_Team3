@@ -1,5 +1,5 @@
 #pragma once
-#define MAPCHIP_SIZE 100
+#define MAPCHIP_SIZE 75
 //MAYBE:ダメージ用のステータスを作るべき？
 
 

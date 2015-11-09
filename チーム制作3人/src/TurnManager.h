@@ -25,6 +25,7 @@ public:
   void Total();
 
   void Draw();
+
   
 private:
   Player player = Player(Type(BALANCE));

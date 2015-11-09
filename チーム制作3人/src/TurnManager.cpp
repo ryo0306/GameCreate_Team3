@@ -23,17 +23,17 @@ void TurnManager::PlayerTurn()
       
       break;
     case Mode::CALCULATION:
-      player.DamageCalculation();
       //boss.GivenDamege(player.GiveDamage());
+      boss.DamageCalculation();
       break;
     case Mode::FINiISH:
-      turn == Turn::ENEMY;
+      turn = Turn::ENEMY;
       break;
     default:
       assert(0);
       break;
     }
-
+    player.ModeChange();
   }
 }
 
@@ -52,15 +52,16 @@ void TurnManager::EnemyTurn()
       boss.AI();
       break;
     case Mode::CALCULATION:
-      boss.DamageCalculation();
       //player.GivenDamege(boss.GiveDammage());
+      player.DamageCalculation();
       break;
     case Mode::FINiISH:
-      turn == Turn::PLAYER;
+      turn = Turn::PLAYER;
       break;
     default:
       break;
     }
+    boss.ModeChange();
   }
 }
 
@@ -75,3 +76,5 @@ void TurnManager::Total()
 {
   map.Edit("res/stage1.txt");
 }
+
+

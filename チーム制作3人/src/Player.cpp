@@ -117,3 +117,32 @@ void Player::CheckMapRange()
 	}
 
 }
+
+
+void Player::ModeChange()
+{
+
+  if (env.isPushKey(GLFW_KEY_ENTER))
+  {
+    switch (mode)
+    {
+    case TYPESELECT:
+      mode = MOVE;
+      break;
+    case MOVE:
+      mode = SKILLSELECT;
+      break;
+    case SKILLSELECT:
+      mode = CALCULATION;
+      break;
+    case CALCULATION:
+      mode = FINiISH;
+      break;
+    case FINiISH:
+      mode = TYPESELECT;
+      break;
+    default:
+      break;
+    }
+  }
+}

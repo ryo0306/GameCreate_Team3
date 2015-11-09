@@ -80,6 +80,8 @@ public:
   //•`ŽÊ
   void Draw(){};
 
+  void ModeChange();
+
   Mode GetMode(){ return mode; }
 
 private:

@@ -21,6 +21,8 @@ void Map::ReadFile(const std::string& file_)
         stage[x][y] = MapObject::NONE;
       else if (map == '1')
         stage[x][y] = MapObject::WALL;
+      else
+        stage[x][y] = MapObject::NONE;
       x += 1;
     }
     y -= 1;
