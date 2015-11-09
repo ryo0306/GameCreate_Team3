@@ -31,6 +31,29 @@ void Map::ReadFile(const std::string& file_)
 
 void Map::Draw()
 {
+  //DEBUG:
+  mouse_pos = env.mousePosition();
+
+  for (int x = 0; x < MapSize::WIDTH; x++)
+  {
+    for (int y = 0; y < MapSize::HEIGHT; y++)
+    {
+      if (Collision(
+        Vec2f(mouse_pos.x() + WINDOW_WIDTH / 2,
+        mouse_pos.y() + WINDOW_HEIGHT / 2),
+        Vec2f(x*MAPCHIP_SIZE, y*MAPCHIP_SIZE),
+        Vec2f(1, 1), Vec2f(MAPCHIP_SIZE, MAPCHIP_SIZE)))
+      {
+        ChangeMap(x, y);
+        frame_color[x][y] = Color::red;
+      }
+      else
+      {
+        frame_color[x][y] = Color::black;
+      }
+    }
+  }
+
   for (int x = 0; x < MapSize::WIDTH; x++)
   {
     for (int y = 0; y < MapSize::HEIGHT; y++)
@@ -68,25 +91,6 @@ void Map::Draw()
 
 void Map::Edit(const std::string& file_)
 {
-  Vec2f mouse_pos = env.mousePosition();
-
-
-  for (int x = 0; x < MapSize::WIDTH; x++)
-  {
-    for (int y = 0; y < MapSize::HEIGHT; y++)
-    {
-      if (Collision(Vec2f(mouse_pos.x() + WINDOW_WIDTH / 2, mouse_pos.y() + WINDOW_HEIGHT / 2), Vec2f(x*MAPCHIP_SIZE, y*MAPCHIP_SIZE),
-        Vec2f(1, 1), Vec2f(MAPCHIP_SIZE, MAPCHIP_SIZE)))
-      {
-        ChangeMap(x, y);
-        frame_color[x][y] = Color::red;
-      }
-      else
-      {
-        frame_color[x][y] = Color::black;
-      }
-    }
-  }
 
   if (env.isPressKey(GLFW_KEY_LEFT_CONTROL) && env.isPushKey(GLFW_KEY_S))
   {
@@ -121,4 +125,22 @@ void Map::ChangeMap(int x_, int y_)
   {
     stage[x_][y_] = 0;
   }
+}
+
+Vec2f Map::GetMousePos(){
+  for (int x = 0; x < MapSize::WIDTH; x++)
+  {
+    for (int y = 0; y < MapSize::HEIGHT; y++)
+    {
+      if (Collision(
+        Vec2f(mouse_pos.x() + WINDOW_WIDTH / 2,
+        mouse_pos.y() + WINDOW_HEIGHT / 2),
+        Vec2f(x*MAPCHIP_SIZE, y*MAPCHIP_SIZE),
+        Vec2f(1, 1), Vec2f(MAPCHIP_SIZE, MAPCHIP_SIZE)))
+      {
+        mouse_pos_on_map = Vec2i(x, y);
+      }
+    }
+  }
+  return mouse_pos_on_map;
 }

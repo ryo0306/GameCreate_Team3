@@ -4,7 +4,7 @@ void TurnManager::SetUp()
 {
   map.ReadFile("res/stage1.txt");
   player.SetUp(Type::BALANCE,Vec2i(2,2));
-  boss.SetUp();
+  boss.SetUp(Vec2i(6,10));
 }
 
 void TurnManager::PlayerTurn()
@@ -61,6 +61,7 @@ void TurnManager::EnemyTurn()
     default:
       break;
     }
+
     boss.ModeChange();
   }
 }
@@ -78,3 +79,12 @@ void TurnManager::Total()
 }
 
 
+void TurnManager::DebugDraw()
+{
+  std::string debug_p = std::to_string(player.GetMode());
+  std::string debug_b = std::to_string(boss.GetMode());
+  font.size(100);
+  font.draw("PLAYER: " + debug_p, Vec2f(-WINDOW_WIDTH/2, WINDOW_HEIGHT/2-100),Color::red);
+  font.draw("Boss: " + debug_b, Vec2f(-WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 250), Color::red);
+
+}

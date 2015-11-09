@@ -39,8 +39,12 @@ public:
   void Draw();
   void Edit(const std::string& file_);
   void ChangeMap(int x_, int y_);
+  Vec2f GetMousePos();
+
 private:
   
   int stage[MapSize::WIDTH][MapSize::HEIGHT];
   Color frame_color[MapSize::WIDTH][MapSize::HEIGHT];
+  Vec2f mouse_pos;
+  Vec2i mouse_pos_on_map;
 };

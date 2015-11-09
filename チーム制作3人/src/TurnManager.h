@@ -5,6 +5,7 @@
 #include "Boss.h"
 
 
+
 enum Turn
 {
   PLAYER,
@@ -26,10 +27,17 @@ public:
 
   void Draw();
 
-  
+  //DEBUG:
+  void DebugDraw();
+
 private:
   Player player = Player(Type(BALANCE));
   Boss boss;
   Map map;
   Turn turn = PLAYER;
+  Font font = Font("res/meiryo.ttc");
+  //DEBUG:
+  char* playermode;
+  char* bossmode;
 };
+

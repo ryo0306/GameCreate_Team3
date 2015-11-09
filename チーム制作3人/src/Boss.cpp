@@ -3,10 +3,10 @@
 
 Boss::Boss()
 {
-	SetUp();
+	SetUp(Vec2i(6,10));
 }
 
-void Boss::SetUp()
+void Boss::SetUp(Vec2i def_pos_)
 {
 	boss_status.hp = 100;
 	boss_status.physical = 100;

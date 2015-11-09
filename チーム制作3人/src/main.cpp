@@ -14,6 +14,7 @@ int main() {
     turnmanager.EnemyTurn();
     turnmanager.Total();
     turnmanager.Draw();
+    turnmanager.DebugDraw();
 
     env.end();
   }

@@ -63,7 +63,7 @@ public:
   //1:コンストラクタ:ここで引数をもらい初期化する
 	Boss();
 
-  void SetUp();
+  void SetUp(Vec2i def_pos_);
 
   //2:playerの座標を登録
   void SetPlayerPos(Vec2i player1_pos_, Vec2i player2_pos_, Vec2i player3_pos_);
@@ -83,6 +83,7 @@ public:
   void ModeChange();
 
   Mode GetMode(){ return mode; }
+
 
 private:
   //Type type;
