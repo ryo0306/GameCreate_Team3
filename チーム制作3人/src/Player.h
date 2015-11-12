@@ -71,7 +71,6 @@ class Player
 public:
   //1:コンストラクタ:ここで引数をもらい初期化する
 	Player(Type type){ size = MAPCHIP_SIZE; type = (Type)1; };
-
   //2:タイプで基本ステータスを設定
   void SetUp(Type type,Vec2i player_pos);
   //3　Draw
@@ -86,8 +85,14 @@ public:
   //7:タイプによってスキルの攻撃力が変わる処理を作る
   void DamageCalculation();
 
+  //
+  void DrawSkill();
+
+  //スキル選択
+  void SkillSelect();
+
   //6:受けるダメージを取得し計算をしてhpに反映
-  void GivenDamege();
+  void GivenDamege(Damege damage_){ given_damage = damage_; };
   
   //処理が終了したかどうか 
   //bool CheckFinished();
@@ -96,13 +101,14 @@ public:
   //もしかしたらセレクト用のクラスを作るべき？
   void Select();
 
+
   //タイプによって色を変える
   void ChangeColor(Type type);
 
   //  現在の処理の段階を確認
   Mode GetMode(){ return mode; }
 
-  void ModeChange();
+  void ModeChange(Mode next_);
 
   Vec2i GetPos(){ return pos; }
 
@@ -117,8 +123,17 @@ private:
   bool is_finish;
   Color color = Color::black;
   Vec2i next_move_position;
-  Font font = Font("res/meiryo");
+  Font font = Font("res/meiryo.ttc");
   Vec2i move_count;
+
+  Vec2f skill_select_point = Vec2f(0, 0);
+  Skill skill=ATTACK;
+
+  Damege damage;
+  Damege give_damage;
+  Damege given_damage;
+  int skill_attack =100;
+
 };
 
 

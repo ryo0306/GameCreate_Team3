@@ -71,19 +71,18 @@ public:
   //3:AI playerの位置によってパターンを変える
   void AI();
 
-  //4:タイプによってスキルの攻撃力が変わる処理を作る
   void DamageCalculation();
 
   //与えるダメージを取得し計算をする
-  void GiveDamage();
+  Damege GiveDamage();
 
   //５:受けるダメージを取得し計算をしてhpに反映
-  void GivenDamage();
+  void GivenDamage(Damege damage_){ given_damage = damage_; };
 
   //描写
   void Draw();
 
-  void ModeChange();
+  void ModeChange(Mode next_);
 
   Mode GetMode(){ return mode; }
 
@@ -108,11 +107,23 @@ public:
   //Type type;
   Vec2i player_pos[3];     //  攻撃するときに見るプレイヤーのポジション
   Vec2i pos[3][3];            //  位置
-  Status boss_status;      //  ステータス
+  Status basic_status;      //  ステータス
   Mode mode = Mode::TYPESELECT;               //  現在の状態
   Damege damege;
+  Damege give_damage;
+  Damege given_damage;
   //DEBUG
   Color boss_color;        //ボスの色
+  //ボスの攻撃パターン
+  enum Boss_type
+  {
+	  STRAIGHT,
+	  BACK,
+	  LEFT,
+	  RIGHT,
+	  ALL
+  };
+  Boss_type boss_type;
 };
 
 

@@ -12,8 +12,16 @@ enum Type
   TANK,
 };
 
+enum Skill
+{
+	DEFENCE,
+	ATTACK,
+	HEAL,
+};
+
 struct Damege
 {
+
   int physical;
   int magic;
 };

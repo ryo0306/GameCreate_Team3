@@ -7,10 +7,10 @@ Boss::Boss()
 
 void Boss::SetUp(Vec2i def_pos_)
 {
-	boss_status.hp = 100;
-	boss_status.physical = 100;
-	boss_status.magic = 100;
-	boss_status.defense = 100;
+	basic_status.hp = 200;
+	basic_status.physical = 100;
+	basic_status.magic = 100;
+	basic_status.defense = 100;
 	pos[0][0] = def_pos_;
 	boss_color = Color::black;
 }
@@ -24,56 +24,78 @@ void Boss::SetPlayerPos(Vec2i player1_pos_, Vec2i player2_pos_, Vec2i player3_po
 
 void Boss::AI()
 {
-	if (player_pos[0].y() < 8)
+	boss_type = ALL;
+	boss_color = Color::black;
+	if ((player_pos[0].x() < 5 && player_pos[1].x() < 5) || 
+		(player_pos[0].x() < 5 && player_pos[2].x() < 5) || 
+		(player_pos[1].x() < 5 && player_pos[2].x() < 5))
 	{
 		boss_color = Color::yellow;
+		boss_type = LEFT;
 	}
-	if (player_pos[0].y() >= 8)
+	if (player_pos[0].x() >= 5 && player_pos[1].x() >= 5 ||
+		player_pos[0].x() >= 5 && player_pos[2].x() >= 5 || 
+		player_pos[1].x() >= 5 && player_pos[2].x() >= 5)
 	{
 		boss_color = Color::blue;
+		boss_type = RIGHT;
 	}
-	if (player_pos[0].x() >= 4 && player_pos[0].x() < 7)
+	if ((player_pos[0].x() >= pos[0][0].x() && player_pos[0].x() < pos[0][0].x() + 3 && player_pos[1].x() >= pos[0][0].x() && player_pos[1].x() < pos[0][0].x() + 3) ||
+		(player_pos[0].x() >= pos[0][0].x() && player_pos[0].x() < pos[0][0].x() + 3 && player_pos[2].x() >= pos[0][0].x() && player_pos[2].x() < pos[0][0].x() + 3) || 
+		(player_pos[1].x() >= pos[0][0].x() && player_pos[1].x() < pos[0][0].x() + 3 && player_pos[2].x() >= pos[0][0].x() && player_pos[2].x() < pos[0][0].x() + 3))
 	{
-		boss_color = Color::purple;
+		if (player_pos[0].y() < pos[0][0].y() || player_pos[1].y() < pos[0][0].y() || player_pos[2].y() < pos[0][0].y())
+		{
+			boss_color = Color::purple;
+			boss_type = BACK;
+		}
+		if (player_pos[0].y() >= pos[0][0].y() || player_pos[1].y() >= pos[0][0].y() || player_pos[2].y() >= pos[0][0].y())
+		{
+			boss_color = Color::gray;
+			boss_type = STRAIGHT;
+		}
 	}
 }
 
 void Boss::DamageCalculation()
 {
+  int total_damage = given_damage.physical - basic_status.defense;
+  if (total_damage <= 0)
+    return;
 
+  basic_status.hp -= total_damage;
 }
 
-void Boss::GivenDamage()
+Damege Boss::GiveDamage()
 {
-
+	give_damage.physical = basic_status.physical;
+	return give_damage;
 }
 
 
-void Boss::ModeChange()
+
+void Boss::ModeChange(Mode next_)
 {
 
-  if (env.isPushKey(GLFW_KEY_ENTER))
+  switch (next_)
   {
-    switch (mode)
-    {
-    case TYPESELECT:
-      mode = MOVE;
-      break;
-    case MOVE:
-      mode = SKILLSELECT;
-      break;
-    case SKILLSELECT:
-      mode = CALCULATION;
-      break;
-    case CALCULATION:
-      mode = FINiISH;
-      break;
-    case FINiISH:
-      mode = TYPESELECT;
-      break;
-    default:
-      break;
-    }
+  case TYPESELECT:
+    mode = MOVE;
+    break;
+  case MOVE:
+    mode = SKILLSELECT;
+    break;
+  case SKILLSELECT:
+    mode = CALCULATION;
+    break;
+  case CALCULATION:
+    mode = FINiISH;
+    break;
+  case FINiISH:
+    mode = TYPESELECT;
+    break;
+  default:
+    break;
   }
 }
 

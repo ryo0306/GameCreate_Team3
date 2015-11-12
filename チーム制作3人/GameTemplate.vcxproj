@@ -11,10 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AttackPattern.h" />
+    <ClInclude Include="src\AttackPattern1.h" />
+    <ClInclude Include="src\AttackPattern2.h" />
+    <ClInclude Include="src\AttackPatternBase.h" />
     <ClInclude Include="src\Boss.h" />
     <ClInclude Include="src\Class.h" />
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\CollisionMap.h" />
     <ClInclude Include="src\FileSelect.h" />
     <ClInclude Include="src\lib\appEnv.hpp" />
     <ClInclude Include="src\lib\audio.hpp" />
@@ -47,9 +50,12 @@
     <ClInclude Include="src\TurnManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AttackPattern1.cpp" />
+    <ClCompile Include="src\AttackPattern2.cpp" />
     <ClCompile Include="src\Boss.cpp" />
     <ClCompile Include="src\Class.cpp" />
     <ClCompile Include="src\Collision.cpp" />
+    <ClCompile Include="src\CollisionMap.cpp" />
     <ClCompile Include="src\FileSelect.cpp" />
     <ClCompile Include="src\lib\appEnv.cpp" />
     <ClCompile Include="src\lib\audio.cpp" />

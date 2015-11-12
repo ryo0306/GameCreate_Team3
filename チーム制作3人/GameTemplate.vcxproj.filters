@@ -46,6 +46,12 @@
     <Filter Include="FileSelect">
       <UniqueIdentifier>{b1dec852-0395-4c8c-bdc5-f544d4dd833d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Class\CollisionMap">
+      <UniqueIdentifier>{81b8897e-ce1e-41db-9bcf-29f26498b1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class\CollisionMap\AttackPattern">
+      <UniqueIdentifier>{21e0d957-fad2-4437-8c96-131af5d39ae3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\lib\appEnv.hpp">
@@ -147,8 +153,17 @@
     <ClInclude Include="src\FileSelect.h">
       <Filter>FileSelect</Filter>
     </ClInclude>
-    <ClInclude Include="src\AttackPattern.h">
-      <Filter>Class</Filter>
+    <ClInclude Include="src\AttackPattern1.h">
+      <Filter>Class\CollisionMap\AttackPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AttackPatternBase.h">
+      <Filter>Class\CollisionMap\AttackPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionMap.h">
+      <Filter>Class\CollisionMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AttackPattern2.h">
+      <Filter>Class\CollisionMap\AttackPattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +248,15 @@
     </ClCompile>
     <ClCompile Include="src\FileSelect.cpp">
       <Filter>FileSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AttackPattern1.cpp">
+      <Filter>Class\CollisionMap\AttackPattern</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionMap.cpp">
+      <Filter>Class\CollisionMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AttackPattern2.cpp">
+      <Filter>Class\CollisionMap\AttackPattern</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

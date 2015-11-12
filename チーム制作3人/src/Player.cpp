@@ -119,6 +119,7 @@ void Player::Select()
 	}
 
 	ChangeColor(type);
+  SetUp(type, pos);
 
 }
 
@@ -171,6 +172,66 @@ void Player::Move(Vec2i mouse_pos_)
 
 void Player::DamageCalculation()
 {
+
+  int total_damage = given_damage.physical - basic_status.defense;
+  if (total_damage <= 0)
+    return;
+  basic_status.hp -= total_damage;
+}
+void Player::DrawSkill()
+{
+	
+	
+
+	font.size(100);
+	font.draw("UŒ‚", Vec2f(-100, 0), Color::red);
+	font.draw("–hŒä", Vec2f(-400, 0), Color::blue);
+	font.draw("‰ñ•œ", Vec2f(200, 0), Color::green);
+
+	drawFillBox(skill_select_point.x(), skill_select_point.y(), 50, 50, Color::cyan);
+
+	SkillSelect();
+
+
+
+}
+
+
+void Player::SkillSelect()
+{
+	switch (skill)
+	{
+	case DEFENCE:
+		skill_select_point = Vec2f(-300, 100);
+		if (env.isPushKey(GLFW_KEY_RIGHT))
+		{
+			skill = ATTACK;
+		}
+		break;
+	case ATTACK:
+		skill_select_point = Vec2f(0, 100);
+		if (env.isPushKey(GLFW_KEY_RIGHT))
+		{
+			skill = HEAL;
+
+		}
+
+		break;
+	case HEAL:
+		skill_select_point = Vec2f(280, 100);
+		if (env.isPushKey(GLFW_KEY_RIGHT))
+		{
+			skill = DEFENCE;
+
+		}
+
+		break;
+	default:
+		assert(0);
+		break;
+	}
+
+	
 }
 
 
@@ -231,31 +292,53 @@ void Player::ChangeColor(Type type_)
 
 }
 
+Damege Player::GiveDamege()
+{
+	switch (skill)
+	{
+	case DEFENCE:
+		give_damage.physical = 0;
+		return give_damage;
+		break;
+	case ATTACK:
+		give_damage.physical = skill_attack + basic_status.physical;
+		return give_damage;
+		break;
+	case HEAL:
+		give_damage.physical = 0;
+		return give_damage;
+		break;
+	default:
+		break;
+	}
 
-void Player::ModeChange()
+	
+
+
+}
+
+
+void Player::ModeChange(Mode next_)
 {
 
-  if (env.isPushKey(GLFW_KEY_ENTER))
+  switch (next_)
   {
-    switch (mode)
-    {
-    case TYPESELECT:
-      mode = MOVE;
-      break;
-    case MOVE:
-      mode = SKILLSELECT;
-      break;
-    case SKILLSELECT:
-      mode = CALCULATION;
-      break;
-    case CALCULATION:
-      mode = FINiISH;
-      break;
-    case FINiISH:
-      mode = TYPESELECT;
-      break;
-    default:
-      break;
-    }
+  case TYPESELECT:
+    mode = MOVE;
+    break;
+  case MOVE:
+    mode = SKILLSELECT;
+    break;
+  case SKILLSELECT:
+    mode = CALCULATION;
+    break;
+  case CALCULATION:
+    mode = FINiISH;
+    break;
+  case FINiISH:
+    mode = TYPESELECT;
+    break;
+  default:
+    break;
   }
 }
