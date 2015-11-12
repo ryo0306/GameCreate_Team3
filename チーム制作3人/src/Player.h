@@ -77,7 +77,7 @@ public:
   //3　Draw
   void Draw();
   //4:移動処理(できれば斜めも)
-  void Move();
+  void Move(Vec2i mouse_pos_);
 
   //動ける範囲を見る
   void CheckMapRange();
@@ -94,22 +94,31 @@ public:
 
   //タイプを選ぶ処理
   //もしかしたらセレクト用のクラスを作るべき？
-  bool Select(){};
+  void Select();
+
+  //タイプによって色を変える
+  void ChangeColor(Type type);
 
   //  現在の処理の段階を確認
   Mode GetMode(){ return mode; }
 
   void ModeChange();
 
+  Vec2i GetPos(){ return pos; }
 
 private:
+
+
   Type type;
   Status basic_status;
   Mode  mode = Mode::TYPESELECT;
   Vec2i  pos;
   int    size;
   bool is_finish;
- 
+  Color color = Color::black;
+  Vec2i next_move_position;
+  Font font = Font("res/meiryo");
+  Vec2i move_count;
 };
 
 

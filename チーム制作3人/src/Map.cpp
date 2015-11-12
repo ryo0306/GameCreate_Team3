@@ -127,7 +127,7 @@ void Map::ChangeMap(int x_, int y_)
   }
 }
 
-Vec2f Map::GetMousePos(){
+Vec2i Map::GetMousePos(){
   for (int x = 0; x < MapSize::WIDTH; x++)
   {
     for (int y = 0; y < MapSize::HEIGHT; y++)

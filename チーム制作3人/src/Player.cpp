@@ -6,6 +6,7 @@
 void Player::SetUp(Type type_,Vec2i pos_)
 {
 	
+	type = type_;
 	switch (type_)
 	{
 	case BALANCE:
@@ -15,7 +16,7 @@ void Player::SetUp(Type type_,Vec2i pos_)
 		basic_status.physical = 110;
 		
 		pos = Vec2i(1, 0);
-		
+
 		break;
 
 	case KNIGHT:
@@ -25,6 +26,7 @@ void Player::SetUp(Type type_,Vec2i pos_)
 		basic_status.physical = 130;
 		
 		pos = Vec2i(2, 0);
+
 		break;
 
 	case WITCH:
@@ -57,34 +59,110 @@ void Player::SetUp(Type type_,Vec2i pos_)
 
 void Player::Draw()
 {
-	drawFillBox(pos.x()*MAPCHIP_SIZE - WINDOW_WIDTH / 2, pos.y()*MAPCHIP_SIZE - WINDOW_HEIGHT / 2, size, size, Color::red);
+	drawFillBox(pos.x()*MAPCHIP_SIZE - WINDOW_WIDTH / 2, pos.y()*MAPCHIP_SIZE - WINDOW_HEIGHT / 2, size, size,color);
+	std::cout << type << std::endl;
+}
+
+
+void Player::Select()
+{
+	if (env.isPullKey(GLFW_KEY_RIGHT))
+	{
+		switch (type)
+		{
+		case BALANCE:
+			type = KNIGHT;
+
+			break;
+		case KNIGHT:
+			type = WITCH;
+
+			break;
+		case WITCH:
+			type = TANK;
+
+			break;
+		case TANK:
+			type = BALANCE;
+			break;
+		default:
+			assert(0);
+			
+			break;
+		}
+	}
+
+	if (env.isPullKey(GLFW_KEY_LEFT))
+	{
+		switch (type)
+		{
+		case BALANCE:
+			type = TANK;
+
+			break;
+		case KNIGHT:
+			type = BALANCE;
+
+			break;
+		case WITCH:
+			type = KNIGHT;
+
+			break;
+		case TANK:
+			type = WITCH;
+			break;
+		default:
+			assert(0);
+
+			break;
+		}
+	}
+
+	ChangeColor(type);
 
 }
 
-void Player::Move()
+void Player::Move(Vec2i mouse_pos_)
 {
-	
-		if (env.isPushKey(GLFW_KEY_RIGHT))
-		{
-			pos.x() += 1;
-		}
-	
+	if (env.isPushButton(Mouse::LEFT))
+	{
+		next_move_position = mouse_pos_;
+		//std::cout << next_move_position << std::endl;
 
-		if (env.isPushKey(GLFW_KEY_LEFT))
-		{
-			pos.x() -= 1;
-		}
-	
+	}
+	if (pos.x() != next_move_position.x())
+	{
 
-		if (env.isPushKey(GLFW_KEY_UP))
+		if (next_move_position.x() > pos.x())
 		{
-			pos.y() += 1;
+			pos.x()++;
 		}
 
-		if (env.isPushKey(GLFW_KEY_DOWN))
+		if (next_move_position.x() < pos.x())
 		{
-			pos.y() -= 1;
+			pos.x()--;
+
 		}
+
+	}
+	else
+	{
+		if (next_move_position.y() > pos.y())
+		{
+			pos.y()++;
+
+		}
+
+		if (next_move_position.y() < pos.y())
+		{
+			pos.y()--;
+
+		}
+	}
+	
+
+	
+	
 
 		CheckMapRange();
 
@@ -115,6 +193,41 @@ void Player::CheckMapRange()
 	{
 		pos.y() = MapSize::HEIGHT-1;
 	}
+
+}
+
+void Player::ChangeColor(Type type_)
+{
+	type = type_;
+	switch (type_)
+	{
+	case BALANCE:
+
+		color = Color::blue;
+		break;
+
+	case KNIGHT:
+
+		color = Color::red;
+		break;
+
+	case WITCH:
+
+		color = Color::purple;
+
+		break;
+
+	case TANK:
+
+		color = Color::green;
+
+		break;
+
+	default:
+		assert(0);
+		break;
+	}
+
 
 }
 

@@ -6,10 +6,11 @@ int main() {
   TurnManager turnmanager;
   turnmanager.SetUp();
 
+  
   while (env.isOpen()) {
     env.begin();
 
-
+ 
     turnmanager.PlayerTurn();
     turnmanager.EnemyTurn();
     turnmanager.Total();

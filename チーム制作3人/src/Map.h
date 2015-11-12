@@ -39,7 +39,7 @@ public:
   void Draw();
   void Edit(const std::string& file_);
   void ChangeMap(int x_, int y_);
-  Vec2f GetMousePos();
+  Vec2i GetMousePos();
 
 private:
   

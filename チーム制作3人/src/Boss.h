@@ -74,23 +74,45 @@ public:
   //4:タイプによってスキルの攻撃力が変わる処理を作る
   void DamageCalculation();
 
+  //与えるダメージを取得し計算をする
+  void GiveDamage();
+
   //５:受けるダメージを取得し計算をしてhpに反映
-  void GivenDamege();
+  void GivenDamage();
 
   //描写
-  void Draw(){};
+  void Draw();
 
   void ModeChange();
 
   Mode GetMode(){ return mode; }
 
+  //注意:for文を9回回す
+  Vec2i GetPos(int x, int y)
+  {
+	  return pos[x][y];
+  };
 
-private:
+  void SetPos(Vec2i def_pos_)
+  {
+	  for (int x = 0; x < 3; x++)
+	  {
+		  for (int y = 0; y < 3; y++)
+		  {
+			  pos[x][y] = Vec2i(def_pos_.x() + x, def_pos_.y() + y);
+		  }
+	  }
+  }
+
+  private:
   //Type type;
   Vec2i player_pos[3];     //  攻撃するときに見るプレイヤーのポジション
-  Vec2i boss_pos;          //  位置
+  Vec2i pos[3][3];            //  位置
   Status boss_status;      //  ステータス
   Mode mode = Mode::TYPESELECT;               //  現在の状態
+  Damege damege;
+  //DEBUG
+  Color boss_color;        //ボスの色
 };
 
 

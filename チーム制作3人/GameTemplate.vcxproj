@@ -11,9 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AttackPattern.h" />
     <ClInclude Include="src\Boss.h" />
     <ClInclude Include="src\Class.h" />
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\FileSelect.h" />
     <ClInclude Include="src\lib\appEnv.hpp" />
     <ClInclude Include="src\lib\audio.hpp" />
     <ClInclude Include="src\lib\camera2D.hpp" />
@@ -48,6 +50,7 @@
     <ClCompile Include="src\Boss.cpp" />
     <ClCompile Include="src\Class.cpp" />
     <ClCompile Include="src\Collision.cpp" />
+    <ClCompile Include="src\FileSelect.cpp" />
     <ClCompile Include="src\lib\appEnv.cpp" />
     <ClCompile Include="src\lib\audio.cpp" />
     <ClCompile Include="src\lib\camera2D.cpp" />

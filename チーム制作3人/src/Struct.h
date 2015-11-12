@@ -1,5 +1,6 @@
 #pragma once
 #define MAPCHIP_SIZE 75
+#include <iostream>
 //MAYBE:ダメージ用のステータスを作るべき？
 
 
@@ -33,3 +34,4 @@ enum Mode
   CALCULATION,     //  ダメージ演算
   FINiISH,         //  終了
 };
+
