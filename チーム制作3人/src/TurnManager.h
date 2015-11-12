@@ -3,6 +3,12 @@
 #include "Map.h"
 #include "Player.h"
 #include "Boss.h"
+#define PATTERN1_WHIGHT
+#define PATTERN1_HEIGHT
+#define PATTERN2_WHIGHT
+#define PATTERN2_HEIGHT
+#define PATTERN3_WHIGHT
+#define PATTERN3_HEIGHT
 
 
 
@@ -40,6 +46,8 @@ public:
   void DebugDraw();
 
   void SetCollisonMap(Vec2i pos_, int pattern);
+
+  void OverLOAD();
 
 private:
   Player player = Player(Type(BALANCE));
