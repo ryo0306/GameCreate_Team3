@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Map.h"
+#include "TurnManager.h"
 
 
 
@@ -123,14 +124,35 @@ void Player::Select()
 
 }
 
+bool Player::CheckCanMove(Vec2i mouse_pos_)
+{
+	for (int i = 0; i < 9; i++)
+	{
+		if (mouse_pos_ == boss_pos[i])
+		{
+			return false;
+		}
+		continue;
+	}
+		return true;
+
+}
+
 void Player::Move(Vec2i mouse_pos_)
 {
 	if (env.isPushButton(Mouse::LEFT))
 	{
-		next_move_position = mouse_pos_;
+		if (CheckCanMove(mouse_pos_))
+		{
+			next_move_position = mouse_pos_;
+		}
 		//std::cout << next_move_position << std::endl;
 
 	}
+
+
+	
+	
 	if (pos.x() != next_move_position.x())
 	{
 
@@ -160,6 +182,7 @@ void Player::Move(Vec2i mouse_pos_)
 
 		}
 	}
+
 	
 
 	
@@ -178,19 +201,26 @@ void Player::DamageCalculation()
     return;
   basic_status.hp -= total_damage;
 }
-void Player::DrawSkill()
+
+void Player::Calculation()
 {
-	
-	
+	switch (skill)
+	{
+	case DEFENCE:
+		Defence();
 
-	font.size(100);
-	font.draw("UŒ‚", Vec2f(-100, 0), Color::red);
-	font.draw("–hŒä", Vec2f(-400, 0), Color::blue);
-	font.draw("‰ñ•œ", Vec2f(200, 0), Color::green);
+		break;
+	case ATTACK:
+		DamageCalculation();
 
-	drawFillBox(skill_select_point.x(), skill_select_point.y(), 50, 50, Color::cyan);
+		break;
+	case HEAL:
+		Heal();
 
-	SkillSelect();
+		break;
+	default:
+		break;
+	}
 
 
 
@@ -199,31 +229,184 @@ void Player::DrawSkill()
 
 void Player::SkillSelect()
 {
+	std::cout << skill << std::endl;
+	if (env.isPullKey(GLFW_KEY_RIGHT))
+	{
+		ChangeSkillRight();
+	}
+
+	if (env.isPullKey(GLFW_KEY_LEFT))
+	{
+		ChangeSkillLeft();
+	}
+	DecisionSkill();
+}
+
+void Player::ChangeSkillRight()
+{
+	
+
+	switch (skill)
+	{
+	case DEFENCE:
+	
+		skill = ATTACK;
+		break;
+	case ATTACK:
+	
+		skill = HEAL;
+
+		break;
+	case HEAL:
+ 
+
+		skill = TEST;
+
+		break;
+	case TEST:
+
+	
+		skill = DEFENCE;
+	
+	default:
+		break;
+	}
+
+
+}
+
+void Player::ChangeSkillLeft()
+{
+	
+	switch (skill)
+	{
+	case DEFENCE:
+
+
+		skill = TEST;
+		break;
+	case ATTACK:
+	
+
+		skill = DEFENCE;
+	
+
+		break;
+	case HEAL:
+
+	
+
+		skill = ATTACK;
+	
+		break;
+	case TEST:
+
+		
+
+		skill = HEAL;
+
+
+	default:
+		break;
+	}
+
+
+}
+
+void Player::DecisionSkill()
+{
+	switch (skill)
+	{
+	case DEFENCE:
+		skill_1 = "ƒeƒXƒg";
+		skill_2 = "–hŒä";
+		skill_3 = "UŒ‚";
+
+		skill_color_1 = Color::purple;
+		skill_color_2 = Color::blue;
+		skill_color_3 = Color::red;
+
+		attack_pattern = 0;
+		break;
+	case ATTACK:
+		skill_1 = "–hŒä";
+		skill_2 = "UŒ‚";
+		skill_3 = "‰ñ•œ";
+
+		skill_color_1 = Color::blue;
+		skill_color_2 = Color::red;
+		skill_color_3 = Color::green;
+		attack_pattern = 1;
+		break;
+	case HEAL:
+		
+		skill_1 = "UŒ‚";
+		skill_2 = "‰ñ•œ";
+		skill_3 = "ƒeƒXƒg";
+
+		skill_color_1 = Color::red;
+		skill_color_2 = Color::green;
+		skill_color_3 = Color::purple;
+
+		attack_pattern = 3;
+		break;
+	case TEST:
+
+
+		skill_1 = "‰ñ•œ";
+		skill_2 = "ƒeƒXƒg";
+		skill_3 = "–hŒä";
+
+		skill_color_1 = Color::green;
+		skill_color_2 = Color::purple;
+		skill_color_3 = Color::blue;
+		attack_pattern = 0;
+		break;
+	default:
+		break;
+	}
+
+
+}
+
+void Player::DrawSkill()
+{
+  skill_select_point = Vec2f(0, 100 - WIN_HEIGHT / 2);
+  font_p.size(100);
+  
+  
+  font_p.draw(skill_1, Vec2f(skill_pos.x() - 400, -WIN_HEIGHT / 2), skill_color_1);
+  font_p.draw(skill_2, Vec2f(skill_pos.x() - 100, -WIN_HEIGHT / 2), skill_color_2);
+  font_p.draw(skill_3, Vec2f(skill_pos.x() + 200, -WIN_HEIGHT / 2), skill_color_3);
+  
+
+  drawFillBox(skill_select_point.x(), skill_select_point.y(), 50, 50, Color::cyan);
+
+
+
+
+}
+
+/*
+void Player::SkillSelect()
+{
 	switch (skill)
 	{
 	case DEFENCE:
 		skill_select_point = Vec2f(-300, 100);
-		if (env.isPushKey(GLFW_KEY_RIGHT))
-		{
-			skill = ATTACK;
-		}
+		
+		//SkillSelectKey(ATTACK);
 		break;
+
 	case ATTACK:
 		skill_select_point = Vec2f(0, 100);
-		if (env.isPushKey(GLFW_KEY_RIGHT))
-		{
-			skill = HEAL;
-
-		}
+		//SkillSelectKey(HEAL);
 
 		break;
+
 	case HEAL:
 		skill_select_point = Vec2f(280, 100);
-		if (env.isPushKey(GLFW_KEY_RIGHT))
-		{
-			skill = DEFENCE;
-
-		}
+		//SkillSelectKey(DEFENCE);
 
 		break;
 	default:
@@ -233,6 +416,36 @@ void Player::SkillSelect()
 
 	
 }
+
+*/
+
+
+void Player::Heal()
+{
+	basic_status.hp += (basic_status.magic / 100)*50;
+
+}
+
+void Player::Defence()
+{
+	basic_status.defense +=(basic_status.magic / 100)*50;
+
+}
+
+
+/*
+void Player::SkillSelectKey(Skill next_skill)
+{
+
+	if (env.isPullKey(GLFW_KEY_RIGHT))
+	{
+		//skill = next_skill;
+		SkillSelect();
+	}
+
+}
+
+*/
 
 
 void Player::CheckMapRange()
@@ -308,12 +521,13 @@ Damege Player::GiveDamege()
 		give_damage.physical = 0;
 		return give_damage;
 		break;
+	case TEST:
+		give_damage.physical = 0;
+		return give_damage;
+	
 	default:
 		break;
 	}
-
-	
-
 
 }
 

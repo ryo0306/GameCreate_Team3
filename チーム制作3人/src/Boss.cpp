@@ -2,7 +2,8 @@
 
 Boss::Boss()
 {
-	SetUp(Vec2i(4,11));
+	SetUp(Vec2i(4,10));
+  rand.setSeed(u_int(time(nullptr)));
 }
 
 void Boss::SetUp(Vec2i def_pos_)
@@ -12,6 +13,13 @@ void Boss::SetUp(Vec2i def_pos_)
 	basic_status.magic = 100;
 	basic_status.defense = 100;
 	pos[0][0] = def_pos_;
+  for (int x = 0; x < 3; x++)
+  {
+    for (int y = 0; y < 3; y++)
+    {
+      pos[x][y] = Vec2i(def_pos_.x() + x, def_pos_.y() + y);
+    }
+  }
 	boss_color = Color::black;
 }
 
@@ -26,35 +34,67 @@ void Boss::AI()
 {
 	boss_type = ALL;
 	boss_color = Color::black;
-	if ((player_pos[0].x() < 5 && player_pos[1].x() < 5) || 
-		(player_pos[0].x() < 5 && player_pos[2].x() < 5) || 
-		(player_pos[1].x() < 5 && player_pos[2].x() < 5))
-	{
-		boss_color = Color::yellow;
-		boss_type = LEFT;
-	}
-	if (player_pos[0].x() >= 5 && player_pos[1].x() >= 5 ||
-		player_pos[0].x() >= 5 && player_pos[2].x() >= 5 || 
-		player_pos[1].x() >= 5 && player_pos[2].x() >= 5)
-	{
-		boss_color = Color::blue;
-		boss_type = RIGHT;
-	}
-	if ((player_pos[0].x() >= pos[0][0].x() && player_pos[0].x() < pos[0][0].x() + 3 && player_pos[1].x() >= pos[0][0].x() && player_pos[1].x() < pos[0][0].x() + 3) ||
-		(player_pos[0].x() >= pos[0][0].x() && player_pos[0].x() < pos[0][0].x() + 3 && player_pos[2].x() >= pos[0][0].x() && player_pos[2].x() < pos[0][0].x() + 3) || 
-		(player_pos[1].x() >= pos[0][0].x() && player_pos[1].x() < pos[0][0].x() + 3 && player_pos[2].x() >= pos[0][0].x() && player_pos[2].x() < pos[0][0].x() + 3))
-	{
-		if (player_pos[0].y() < pos[0][0].y() || player_pos[1].y() < pos[0][0].y() || player_pos[2].y() < pos[0][0].y())
-		{
-			boss_color = Color::purple;
-			boss_type = BACK;
-		}
-		if (player_pos[0].y() >= pos[0][0].y() || player_pos[1].y() >= pos[0][0].y() || player_pos[2].y() >= pos[0][0].y())
-		{
-			boss_color = Color::gray;
-			boss_type = STRAIGHT;
-		}
-	}
+  player_num = rand(0, 2);
+    // ëO
+    if (player_pos[player_num].x() >= pos[0][0].x() &&
+        player_pos[player_num].x() < pos[2][0].x() &&
+        player_pos[player_num].y() < pos[0][0].y())
+    {
+      boss_color = Color::purple;
+      boss_type = Boss_type::STRAIGHT;
+    }
+    // å„ÇÎ
+    else if (player_pos[player_num].x() >= pos[0][0].x() &&
+             player_pos[player_num].x() < pos[2][0].x() &&
+             player_pos[player_num].y() >= pos[0][2].y())
+    {
+      boss_color = Color::gray;
+      boss_type = Boss_type::BACK;
+    }
+    // ç∂
+    else if (player_pos[player_num].x() < pos[0][0].x())
+    {
+      boss_color = Color::yellow;
+      boss_type = Boss_type::LEFT;
+    }
+    // âE
+    else if (player_pos[player_num].x() >= pos[2][2].x())
+    {
+      boss_color = Color::blue;
+      boss_type = Boss_type::RIGHT;
+    }
+
+  
+	//if ((player_pos[0].x() < 5 && player_pos[1].x() < 5) || 
+	//	(player_pos[0].x() < 5 && player_pos[2].x() < 5) || 
+	//	(player_pos[1].x() < 5 && player_pos[2].x() < 5))
+	//{
+	//	boss_color = Color::yellow;
+	//	boss_type = LEFT;
+	//}
+	//if (player_pos[0].x() >= 5 && player_pos[1].x() >= 5 ||
+	//	player_pos[0].x() >= 5 && player_pos[2].x() >= 5 || 
+	//	player_pos[1].x() >= 5 && player_pos[2].x() >= 5)
+	//{
+	//	boss_color = Color::blue;
+	//	boss_type = RIGHT;
+	//}
+	//if ((player_pos[0].x() >= pos[0][0].x() && player_pos[0].x() < pos[0][0].x() + 3 && player_pos[1].x() >= pos[0][0].x() && player_pos[1].x() < pos[0][0].x() + 3) ||
+	//	(player_pos[0].x() >= pos[0][0].x() && player_pos[0].x() < pos[0][0].x() + 3 && player_pos[2].x() >= pos[0][0].x() && player_pos[2].x() < pos[0][0].x() + 3) || 
+	//	(player_pos[1].x() >= pos[0][0].x() && player_pos[1].x() < pos[0][0].x() + 3 && player_pos[2].x() >= pos[0][0].x() && player_pos[2].x() < pos[0][0].x() + 3))
+	//{
+	//	if (player_pos[0].y() < pos[0][0].y() || player_pos[1].y() < pos[0][0].y() || player_pos[2].y() < pos[0][0].y())
+	//	{
+	//		boss_color = Color::purple;
+	//		boss_type = BACK;
+	//	}
+	//	if (player_pos[0].y() >= pos[0][0].y() || player_pos[1].y() >= pos[0][0].y() || player_pos[2].y() >= pos[0][0].y())
+	//	{
+	//		boss_color = Color::gray;
+	//		boss_type = STRAIGHT;
+	//	}
+	//}
+  
 }
 
 void Boss::DamageCalculation()

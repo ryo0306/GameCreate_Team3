@@ -12,12 +12,17 @@ enum Type
   TANK,
 };
 
+
+
 enum Skill
 {
 	DEFENCE,
 	ATTACK,
 	HEAL,
+  TEST,
 };
+
+
 
 struct Damege
 {
@@ -43,3 +48,10 @@ enum Mode
   FINiISH,         //  èIóπ
 };
 
+enum class Direction
+{
+  UP,
+  RIGHT,
+  DOWN,
+  LEFT,
+};

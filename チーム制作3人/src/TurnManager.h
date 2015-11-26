@@ -20,12 +20,16 @@ class TurnManager
 public:
   TurnManager()
   {
-
+    SetUp();
   }
 
   void SetUp();
 
   void PlayerTurn();
+
+  void PlayerDraw(int i);
+
+  void EnemyDraw();
 
   void EnemyTurn();
   
@@ -40,8 +44,16 @@ public:
 
   void OverLOAD();
 
+  void PlayerIterator(int i);
+  //DEBUG:
+  void PlayerIterator();
+
+  bool TurnEnd();
+
+
 private:
-  Player player = Player(Type(BALANCE));
+  Player* player[3];
+  int now_player = 0;
   Boss boss;
   Map map;
   CollisionMap collision_map;

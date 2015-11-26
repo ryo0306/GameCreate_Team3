@@ -3,6 +3,7 @@
 #include "ScreenMake.h"
 
 
+
 //------------------//
 //     命名規則     //
 //-----------------//
@@ -85,11 +86,25 @@ public:
   //7:タイプによってスキルの攻撃力が変わる処理を作る
   void DamageCalculation();
 
+  void Calculation();
+
   //
-  void DrawSkill();
+  
 
   //スキル選択
+  //void SkillSelect();
+  //スキル選択のSwitchの中身
+  //void SkillSelectKey(Skill next_skill);
+
   void SkillSelect();
+  void DecisionSkill();
+  void ChangeSkillRight();
+  void ChangeSkillLeft();
+  void DrawSkill();
+
+
+  void Heal();
+  void Defence();
 
   //6:受けるダメージを取得し計算をしてhpに反映
   void GivenDamege(Damege damage_){ given_damage = damage_; };
@@ -112,6 +127,25 @@ public:
 
   Vec2i GetPos(){ return pos; }
 
+  int GetAttackPattern(){ return attack_pattern; }
+
+  bool IsEnd(){ return is_end; }
+
+  void SetBossPos( Vec2i boss_pos_ = Vec2i(4,10)){
+	  int k = 0;
+	  for (int i = 0; i < 3; i++)
+	  {
+		  for (int j = 0; j < 3; j++)
+		  {
+			  boss_pos[k] = Vec2i(boss_pos_.x() + i, boss_pos_.y() + j);
+			  k++;
+		  }
+	  }
+  }
+
+  //ボスと重なっていないかチェックする
+  bool CheckCanMove(Vec2i mouse_pos);
+
 private:
 
 
@@ -121,18 +155,35 @@ private:
   Vec2i  pos;
   int    size;
   bool is_finish;
+  int attack_pattern = 0;
   Color color = Color::black;
   Vec2i next_move_position;
-  Font font = Font("res/meiryo.ttc");
+  Font font_p = Font("res/meiryo.ttc");
   Vec2i move_count;
 
-  Vec2f skill_select_point = Vec2f(0, 0);
+  Vec2f skill_select_point;
   Skill skill=ATTACK;
+  Skill next_skill;
+
+  Vec2i  boss_pos[9];
 
   Damege damage;
   Damege give_damage;
   Damege given_damage;
   int skill_attack =100;
+  Vec2f skill_pos =Vec2f(0,0);
+
+  std::string skill_1 = "防御";
+  std::string skill_2 = "攻撃";
+  std::string skill_3 = "回復";
+
+  Color skill_color_1 = Color::blue;
+  Color skill_color_2 = Color::red;
+  Color skill_color_3 = Color::green;
+
+  bool is_end = false;
+  
+
 
 };
 

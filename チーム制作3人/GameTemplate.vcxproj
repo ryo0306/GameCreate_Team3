@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="src\AttackPattern1.h" />
     <ClInclude Include="src\AttackPattern2.h" />
+    <ClInclude Include="src\AttackPattern3.h" />
     <ClInclude Include="src\AttackPatternBase.h" />
     <ClInclude Include="src\Boss.h" />
     <ClInclude Include="src\Class.h" />

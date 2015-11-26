@@ -1,7 +1,7 @@
 #pragma once
 #include "Struct.h"
 #include "ScreenMake.h"
-
+#include <ctime>
 //------------------//
 //     命名規則     //
 //-----------------//
@@ -86,7 +86,7 @@ public:
 
   Mode GetMode(){ return mode; }
 
-  //注意:for文を9回回す
+  //注意:for文を3*3回回す
   Vec2i GetPos(int x, int y)
   {
 	  return pos[x][y];
@@ -114,6 +114,9 @@ public:
   Damege given_damage;
   //DEBUG
   Color boss_color;        //ボスの色
+  Random rand;
+  
+  int player_num = 0;
   //ボスの攻撃パターン
   enum Boss_type
   {

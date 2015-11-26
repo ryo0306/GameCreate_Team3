@@ -165,6 +165,9 @@
     <ClInclude Include="src\AttackPattern2.h">
       <Filter>Class\CollisionMap\AttackPattern</Filter>
     </ClInclude>
+    <ClInclude Include="src\AttackPattern3.h">
+      <Filter>Class\CollisionMap\AttackPattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\appEnv.cpp">
